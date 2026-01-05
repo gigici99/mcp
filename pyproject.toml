@@ -1,0 +1,10 @@
+[project]
+name = "mcp-tests-tools"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "beautifulsoup4>=4.14.3",
+    "mcp>=1.25.0",
+]
