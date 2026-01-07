@@ -60,6 +60,18 @@ def junit_test_style():
     4. Always include a test for edge cases (null inputs, empty strings)
     """
 
+
+# The selenium test
+@mcp.tool()
+def list_frontend_files() -> list[str]:
+    """List of all HTML/Vue/JS file of the project for selenium test"""
+    return src.WebProjectAnalyzer.list_web_file()
+
+@mcp.tool()
+def analyze_page_elements(file_path: str) -> dict:
+    """Catch the Id and selector from web file and generate the selenium Script"""
+    return src.WebProjectAnalyzer.get_element_selectors(file_path)
+
 @mcp.resource("project://summary")
 def get_project_context() -> str: # Rimosso root_path
     """Returns a summary of the project detected in the current working directory."""

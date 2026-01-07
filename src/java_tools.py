@@ -29,8 +29,9 @@ class JavaProjectAnalyzer:
             for file in files:
                 if file.endswith(".java"):
                     full_path = Path(root) / file
+                    abs_path = full_path.resolve()
                     # Return path relative to the project root
-                    found_classes.append(str(full_path.relative_to(self.root_dir)))
+                    found_classes.append(str(abs_path))
         
         return found_classes
 
