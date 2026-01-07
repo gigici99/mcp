@@ -62,3 +62,17 @@ class WebProjectAnalyzer:
             }
         except Exception as e:
             return {"error": f"Could not parse file: {str(e)}"}
+        
+
+    def get_selenium_standards(self) -> str:
+        """Returns the strict coding standards for Selenium test generation."""
+        return """
+        SELENIUM TEST STANDARDS:
+        - NAMING CONVENTION: Test classes MUST end with the suffix 'SeleniumIT.java' (e.g., LoginSeleniumIT.java).
+        - ARCHITECTURE: Implement the Page Object Model (POM) pattern. Separate page elements/actions from the test logic.
+        - LIBRARIES: Use JUnit 5 (Jupiter) for assertions and lifecycle hooks (@Test, @BeforeEach, @AfterEach).
+        - DRIVER MANAGEMENT: Use 'io.github.bonigarcia.wdm.WebDriverManager' for automated driver setup.
+        - CLEANUP: Ensure 'driver.quit()' is always called in the @AfterEach block to prevent memory leaks.
+        - SELECTORS: Favor 'By.id' or 'By.cssSelector' over XPath whenever possible for better performance and stability.
+        - TARGET DIRECTORY: Save all web tests under 'src/test/java/com/magazine/manager/selenium/'.
+        """

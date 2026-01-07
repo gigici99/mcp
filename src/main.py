@@ -72,6 +72,29 @@ def analyze_page_elements(file_path: str) -> dict:
     """Catch the Id and selector from web file and generate the selenium Script"""
     return src.WebProjectAnalyzer.get_element_selectors(file_path)
 
+@mcp.prompt()
+def create_selenium_suite(page_name: str) -> str:
+    """
+    Guides the AI to create a standardized Selenium test suite for a specific page.
+    """
+    standards = src.WebProjectAnalyzer.get_selenium_standards()
+    
+    return f"""
+    You are an expert QA Automation Engineer. Your task is to generate a Selenium test suite for the '{page_name}' page.
+    
+    ### Guidelines & Standards:
+    {standards}
+    
+    ### Workflow Instructions:
+    1. **Analyze**: Use the 'analyze_page_elements' tool to inspect the HTML/Vue file for the '{page_name}' page.
+    2. **Design**: Create a Page Object class containing WebElements and action methods (e.g., loginUser, clickSubmit).
+    3. **Implement**: Create the Test class using the POM, following the naming convention mentioned above.
+    4. **Verify**: Ensure the package declarations and imports (JUnit 5, Selenium, WebDriverManager) are correct.
+    5. **Save**: Use 'write_test_file' to store both the Page Object and the Test class in the correct project directory.
+
+    Please start by listing which file you are going to analyze.
+    """
+
 @mcp.resource("project://summary")
 def get_project_context() -> str: # Rimosso root_path
     """Returns a summary of the project detected in the current working directory."""
